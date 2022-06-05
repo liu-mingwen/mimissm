@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjpowernode.mapper.UsersfavouriteMapper" >
+  <resultMap id="BaseResultMap" type="com.bjpowernode.pojo.Usersfavourite" >
+    <result column="ufid" property="ufid" jdbcType="INTEGER" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="p_content" property="pContent" jdbcType="VARCHAR" />
+    <result column="p_price" property="pPrice" jdbcType="INTEGER" />
+    <result column="p_image" property="pImage" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="p_date" property="pDate" jdbcType="DATE" />
+    <result column="ufpid" property="ufpid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ufid, p_name, p_content, p_price, p_image, type_id, p_date, ufpid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bjpowernode.pojo.UsersfavouriteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from usersfavourite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bjpowernode.pojo.UsersfavouriteExample" >
+    delete from usersfavourite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from usersfavourite
+    where ufpid= #{ufpid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjpowernode.pojo.Usersfavourite" >
+    insert into usersfavourite (ufid, p_name, p_content,
+                                p_price, p_image, type_id,
+                                p_date, ufpid)
+    values (#{ufid,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{pContent,jdbcType=VARCHAR},
+            #{pPrice,jdbcType=INTEGER}, #{pImage,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER},
+            #{pDate,jdbcType=DATE}, #{ufpid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpowernode.pojo.Usersfavourite" >
+    insert into usersfavourite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ufid != null" >
+        ufid,
+      </if>
+      <if test="pName != null" >
+        p_name,
+      </if>
+      <if test="pContent != null" >
+        p_content,
+      </if>
+      <if test="pPrice != null" >
+        p_price,
+      </if>
+      <if test="pImage != null" >
+        p_image,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="pDate != null" >
+        p_date,
+      </if>
+      <if test="ufpid != null" >
+        ufpid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ufid != null" >
+        #{ufid,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pContent != null" >
+        #{pContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null" >
+        #{pPrice,jdbcType=INTEGER},
+      </if>
+      <if test="pImage != null" >
+        #{pImage,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="pDate != null" >
+        #{pDate,jdbcType=DATE},
+      </if>
+      <if test="ufpid != null" >
+        #{ufpid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bjpowernode.pojo.UsersfavouriteExample" resultType="java.lang.Integer" >
+    select count(*) from usersfavourite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update usersfavourite
+    <set >
+      <if test="record.ufid != null" >
+        ufid = #{record.ufid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pName != null" >
+        p_name = #{record.pName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pContent != null" >
+        p_content = #{record.pContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pPrice != null" >
+        p_price = #{record.pPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.pImage != null" >
+        p_image = #{record.pImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pDate != null" >
+        p_date = #{record.pDate,jdbcType=DATE},
+      </if>
+      <if test="record.ufpid != null" >
+        ufpid = #{record.ufpid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update usersfavourite
+    set ufid = #{record.ufid,jdbcType=INTEGER},
+    p_name = #{record.pName,jdbcType=VARCHAR},
+    p_content = #{record.pContent,jdbcType=VARCHAR},
+    p_price = #{record.pPrice,jdbcType=INTEGER},
+    p_image = #{record.pImage,jdbcType=VARCHAR},
+    type_id = #{record.typeId,jdbcType=INTEGER},
+    p_date = #{record.pDate,jdbcType=DATE},
+    ufpid = #{record.ufpid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
